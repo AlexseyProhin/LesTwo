@@ -10,6 +10,11 @@
 
 
 
+https://www.youtube.com/watch?v=pln38fIbYqA доклад
+
+
+
+
 https://www.youtube.com/watch?v=cSCWoO7HYuc 10 поток 
 https://www.youtube.com/watch?v=GhLZig_Sp0Y&t=8508s 9 поток (крутое)
 

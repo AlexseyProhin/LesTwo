@@ -13,10 +13,6 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class TextBoxTests {
 
-  //  @BeforeAll
-    //static void beforeAll() {
-      //  Configuration.st = true;
-   // }
 
     @Test
     void fillFormTest() {

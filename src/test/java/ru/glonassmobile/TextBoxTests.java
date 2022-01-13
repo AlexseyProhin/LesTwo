@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.conditions.Visible;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -14,6 +15,8 @@ import static com.codeborne.selenide.Selenide.open;
 public class TextBoxTests {
 
 
+
+
     @Test
     void fillFormTest() {
         open("https://demoqa.com/text-box");
@@ -22,8 +25,6 @@ public class TextBoxTests {
         $("#currentAddress").setValue("Moscow");
         $("#permanentAddress").setValue("Twoadress");
         $("#submit").scrollTo().click();
-
-
         $("#output").shouldBe(visible);
         $("#name").shouldHave(text("FirstName"));
         $("#email").shouldHave(text("gavgav@yandex.ru"));

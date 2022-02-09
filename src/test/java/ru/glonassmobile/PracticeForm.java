@@ -3,6 +3,7 @@ package ru.glonassmobile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pages.PracticeFormPage;
 
 import java.io.File;
 
@@ -13,28 +14,26 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeForm {
 
+    PracticeFormPage practiceFormPage = new PracticeFormPage();
+
     @BeforeEach
     void openform () {
         clearBrowserCookies();
-        open("https://demoqa.com/automation-practice-form");
 
     }
 
     @DisplayName("Форма регистрации")
     @Test
     void checkRegisrationForm() {
-
+        practiceFormPage.OpenPage()
+        .firstNameInput("Alex")
+        .typeLastName("Prooo");
         $("#firstName").setValue("Username");
         $("#lastName").setValue("Last");
         $("#userEmail").setValue("mail@ggoogle.con");
         $("[for='gender-radio-2']").click(); // radio button
         $("#userNumber").setValue("8965654731");
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption("July");
-        $(".react-datepicker__year-select").selectOption("1995");
-        $(".react-datepicker__year-select").selectOption("1995");
-        $(".react-datepicker__year-select").selectOption("1995");
-        $("[aria-label$='July 20th, 1995']").click(); // $ dollar =
+        practiceFormPage.calendarComponent.setDate("July", "1995");
         $("#subjectsInput").setValue("Math").pressEnter();
         File someFile = new File("src/test/resources/img/1.png");
         $("#uploadPicture").uploadFile(someFile);
@@ -58,7 +57,7 @@ public class PracticeForm {
         $(".table-responsive").shouldHave(text("1.png"));
         $(".table-responsive").shouldHave(text("1111111111111111"));
         $(".table-responsive").shouldHave(text("NCR Noida"));
-        //$(".modal-body").shouldHave(text("Frmale"));
+
 
     }
 }

@@ -10,30 +10,28 @@ import java.io.File;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static ru.glonassmobile.TestData.userEmail;
 
 
-public class PracticeForm {
+public class PracticeForm extends TestBase {
 
     PracticeFormPage practiceFormPage = new PracticeFormPage();
 
-    @BeforeEach
-    void openform () {
-        clearBrowserCookies();
 
-    }
 
     @DisplayName("Форма регистрации")
     @Test
     void checkRegisrationForm() {
         practiceFormPage.OpenPage()
         .firstNameInput("Alex")
-        .typeLastName("Prooo");
-        $("#firstName").setValue("Username");
-        $("#lastName").setValue("Last");
-        $("#userEmail").setValue("mail@ggoogle.con");
-        $("[for='gender-radio-2']").click(); // radio button
-        $("#userNumber").setValue("8965654731");
-        practiceFormPage.calendarComponent.setDate("July", "1995");
+        .typeLastName("Prooo")
+         .userEmail("userEmail")
+          .clickOn("chooseGender")
+           .number("8965654731")
+            .calendarComponent.setDate("July", "1995");
+          practiceFormPage.subjectsInput("Math");
+
+
         $("#subjectsInput").setValue("Math").pressEnter();
         File someFile = new File("src/test/resources/img/1.png");
         $("#uploadPicture").uploadFile(someFile);

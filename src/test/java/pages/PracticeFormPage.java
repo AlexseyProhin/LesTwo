@@ -10,7 +10,14 @@ public class PracticeFormPage {
 
  SelenideElement
          firstNameInput = $("#firstName"),
-         lastNameInput = $("#lastName");
+         lastNameInput = $("#lastName"),
+         userEmail = $("#userEmail"),
+         chooseGender = $("[for='gender-radio-2']"),
+         userNumber = $("#userNumber"),
+    subjectsInput = $("#subjectsInput");
+
+
+
 
     public CalendarComponent calendarComponent = new CalendarComponent();
     public PracticeFormPage OpenPage() {
@@ -31,7 +38,24 @@ public class PracticeFormPage {
 
         return this;
    }
+   public  PracticeFormPage userEmail(String value) {
+        userEmail.setValue(value);
+       return this;
+   }
 
 
+    public PracticeFormPage clickOn(String value) {
+        chooseGender.click();
+        return this;
+    }
 
+    public PracticeFormPage number(String value) {
+        userNumber.setValue(value);
+        return this;
+    }
+
+    public PracticeFormPage subjectsInput(String value) {
+        subjectsInput.setValue(value).pressEnter();
+        return this;
+    }
 }

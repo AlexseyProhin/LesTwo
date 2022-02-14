@@ -1,5 +1,6 @@
 package ru.glonassmobile;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,45 +17,43 @@ import static ru.glonassmobile.TestData.userEmail;
 public class PracticeForm extends TestBase {
 
     PracticeFormPage practiceFormPage = new PracticeFormPage();
+    public File someFile = new File("src/test/resources/img/1.png");
 
+    Faker faker = new Faker();
+    String firstName = faker.name().firstName();
+    String userEmail = faker.internet().emailAddress();
 
 
     @DisplayName("Форма регистрации")
     @Test
     void checkRegisrationForm() {
-        practiceFormPage.OpenPage()
-        .firstNameInput("Alex")
-        .typeLastName("Prooo")
-         .userEmail("userEmail")
-          .clickOn("chooseGender")
-           .number("8965654731")
-            .calendarComponent.setDate("July", "1995");
-          practiceFormPage.subjectsInput("Math");
+        practiceFormPage
+                .OpenPage()
+                .firstNameInput(firstName)
+                .typeLastName("Prooo")
+                .userEmail(userEmail)
+                .clickOn("chooseGender")
+                .number("8965654731")
+            .calendarComponent.
+                setDate("July", "1995");
+          practiceFormPage
+                  .subjectsInput("Math")
+                  .downloadFile(someFile)
+                  .currentAddress("1111111111111111")
+                  .stateAndCity()
+                  .submit();
 
-
-        $("#subjectsInput").setValue("Math").pressEnter();
-        File someFile = new File("src/test/resources/img/1.png");
-        $("#uploadPicture").uploadFile(someFile);
-        $("#currentAddress").setValue("1111111111111111");
-        $("#state").scrollTo().click();
-        $("#stateCity-wrapper").$(byText("NCR")).click();
-        $("#city").click();
-        $("#stateCity-wrapper").$(byText("Noida")).click();
-        $("#submit").click();
+          
         checkResult();
 
     }
 
     void checkResult() {
-        $(byText("Username Last")).should(appear);
-        $(byText("mail@ggoogle.con")).should(appear);
-        $(".modal-content").shouldHave(text("Female"));
-        $(".table-responsive").shouldHave(text("8965654731"));
-        $(".table-responsive").shouldHave(text("20 July,1995"));
-        $(".table-responsive").shouldHave(text("Maths"));
-        $(".table-responsive").shouldHave(text("1.png"));
-        $(".table-responsive").shouldHave(text("1111111111111111"));
-        $(".table-responsive").shouldHave(text("NCR Noida"));
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        $(".table-responsive").$(byText("Student Name"))
+                .parent().shouldHave(text(firstName +" Prooo"));
+        $(".table-responsive")//.$(byText("Email"))
+                .parent().shouldHave(text(userEmail));
 
 
     }
